@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Momentum Jumper</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD Overlay -->
+        <div id="hud">
+            <!-- Top center: checkpoint progress -->
+            <div id="progress-container">
+                <div id="progress-bar">
+                    <div id="progress-fill"></div>
+                    <div id="progress-marker"></div>
+                </div>
+            </div>
+
+            <!-- Top right: pause button -->
+            <button id="pause-btn">⏸</button>
+
+            <!-- Bottom left: hearts and score -->
+            <div id="stats">
+                <div id="hearts">
+                    <span class="heart" data-index="0">❤️</span>
+                    <span class="heart" data-index="1">❤️</span>
+                    <span class="heart" data-index="2">❤️</span>
+                </div>
+                <div id="score-display">
+                    <span>Туслах цэг: <span id="current-score">0</span></span>
+                    <span>Шилдэг: <span id="best-score">0</span></span>
+                </div>
+            </div>
+
+            <!-- Bottom right: difficulty -->
+            <div id="difficulty-display">Түвшин 1</div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div id="pause-menu" class="hidden">
+            <div class="menu-panel">
+                <h2>Түр зогссон</h2>
+                <button id="resume-btn">Үргэлжлүүлэх</button>
+                <button id="lobby-btn">Цэсрүү буцах</button>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <div class="lobby">
+                <div class="lobby__bg"></div>
+                <div class="lobby__overlay"></div>
+                <div class="lobby__top">
+                    <div class="lobby__profile">
+                        <button class="lobby__circle-btn lobby__circle-btn--blue">
+                            <span class="icon-user"></span>
+                        </button>
+                        <div>
+                            <div class="lobby__profile-name">Тоглогч</div>
+                        </div>
+                    </div>
+                    <button class="lobby__circle-btn lobby__circle-btn--glass">
+                        <span class="icon-settings"></span>
+                    </button>
+                </div>
+
+                <div class="lobby__side lobby__side--left">
+                    <button class="lobby__pill">
+                        <div class="lobby__pill-icon lobby__pill-icon--red">
+                            <span class="icon-wallet"></span>
+                        </div>
+                        <div class="lobby__pill-text">
+                            <div class="lobby__pill-label">Түрийвч</div>
+                            <div class="lobby__pill-value" id="lobby-wallet">847</div>
+                        </div>
+                    </button>
+                    <button class="lobby__pill" id="shop-btn">
+                        <div class="lobby__pill-icon lobby__pill-icon--white">
+                            <span class="icon-cart"></span>
+                        </div>
+                        <div class="lobby__pill-text">
+                            <div class="lobby__pill-label">Дэлгүүр</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="lobby__side lobby__side--right">
+                    <button class="lobby__pill" id="leaderboard-btn">
+                        <div class="lobby__pill-icon lobby__pill-icon--pink">
+                            <span class="icon-gift"></span>
+                        </div>
+                        <div class="lobby__pill-text">
+                            <div class="lobby__pill-label">Тэргүүлэгчид</div>
+                        </div>
+                    </button>
+                    <button class="lobby__pill" id="inventory-btn">
+                        <div class="lobby__pill-icon lobby__pill-icon--amber">
+                            <span class="icon-box"></span>
+                        </div>
+                        <div class="lobby__pill-text">
+                            <div class="lobby__pill-label">Агуулах</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="lobby__center">
+                    <div class="lobby__prize">
+                        <div class="lobby__prize-title">Шагналын сан</div>
+                        <div class="lobby__prize-amount">9,999</div>
+                    </div>
+                    <div class="lobby__stats">
+                        <div>Зэрэглэл: <span id="lobby-rank">#127</span></div>
+                        <div>Туг: <span id="lobby-flags">45</span></div>
+                    </div>
+                    <div class="lobby__wolf">
+                        <img src="/static/wolf.png" alt="Wolf" />
+                    </div>
+                    <button class="lobby__start-btn" id="start-btn">
+                        <span>Эхлэх</span>
+                    </button>
+                    <div class="lobby__best">Шилдэг: <span id="start-best">0</span> туслах цэг</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shop Screen (Figma Design) -->
+        <div id="shop-screen" class="modal-screen hidden">
+            <div class="shop-panel">
+                <button class="modal-close shop-close">×</button>
+                <div class="shop-balance">
+                    <span class="shop-balance__icon">💰</span>
+                    <span class="shop-balance__value" id="shop-coins">847</span>
+                </div>
+                <div class="shop-header">
+                    <h1 class="shop-title">ЭРДЭНЭСИЙН ДЭЛГҮҮР</h1>
+                </div>
+                <div class="shop-content">
+                    <div class="shop-section">
+                        <h2 class="shop-section__title">Арьсны Авдар</h2>
+                        <div class="shop-grid">
+                            <div class="chest-card chest-card--common">
+                                <h3 class="chest-card__title">Энгийн Авдар</h3>
+                                <div class="chest-card__image-container">
+                                    <img src="/static/chest-common.png" alt="Common" class="chest-card__image">
+                                </div>
+                                <p class="chest-card__desc">Дүрийн үндсэн арьс</p>
+                                <button class="chest-card__btn"><span class="chest-card__price-icon">💰</span> 100</button>
+                            </div>
+                            <div class="chest-card chest-card--rare">
+                                <h3 class="chest-card__title">Ховор Авдар</h3>
+                                <div class="chest-card__image-container">
+                                    <img src="/static/chest-rare.png" alt="Rare" class="chest-card__image">
+                                </div>
+                                <p class="chest-card__desc">Онцгой арьс</p>
+                                <button class="chest-card__btn"><span class="chest-card__price-icon">💰</span> 500</button>
+                            </div>
+                            <div class="chest-card chest-card--epic">
+                                <h3 class="chest-card__title">Эпик Авдар</h3>
+                                <div class="chest-card__image-container">
+                                    <img src="/static/chest-epic.png" alt="Epic" class="chest-card__image">
+                                </div>
+                                <p class="chest-card__desc">Хамгийн ховор арьс</p>
+                                <button class="chest-card__btn"><span class="chest-card__price-icon">💰</span> 2000</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Screen (Figma Design) -->
+        <div id="inventory-screen" class="modal-screen hidden">
+            <div class="inventory-panel">
+                <div class="inventory-header">
+                    <div class="inventory-header__left">
+                        <div class="inventory-icon">🛍️</div>
+                        <span class="inventory-title">АГУУЛАХ</span>
+                    </div>
+                    <button class="modal-close inventory-close">×</button>
+                </div>
+                <div class="inventory-tabs">
+                    <button class="inventory-tab inventory-tab--active" data-tab="trails">ЭФФЭКТ</button>
+                    <button class="inventory-tab" data-tab="skins">АРЬС</button>
+                </div>
+                <div class="inventory-grid">
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                    <div class="inventory-slot inventory-slot--empty">+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen (Figma Design) -->
+        <div id="leaderboard-screen" class="modal-screen hidden">
+            <div class="leaderboard-panel">
+                <div class="leaderboard-header">Тэргүүлэгчид</div>
+                <button class="modal-close leaderboard-close">×</button>
+                <div class="leaderboard-list">
+                    <div class="leaderboard-entry leaderboard-entry--rank1">
+                        <div class="leaderboard-entry__rank">1</div>
+                        <div class="leaderboard-entry__name">ТА</div>
+                        <div class="leaderboard-entry__score"><span id="lb-best-score">0</span> 🚩</div>
+                    </div>
+                    <div class="leaderboard-entry">
+                        <div class="leaderboard-entry__rank">2</div>
+                        <div class="leaderboard-entry__name">ТОГЛОГЧИЙН НЭР</div>
+                        <div class="leaderboard-entry__score">756 🚩</div>
+                    </div>
+                    <div class="leaderboard-entry">
+                        <div class="leaderboard-entry__rank">3</div>
+                        <div class="leaderboard-entry__name">ТОГЛОГЧИЙН НЭР</div>
+                        <div class="leaderboard-entry__score">725 🚩</div>
+                    </div>
+                    <div class="leaderboard-entry">
+                        <div class="leaderboard-entry__rank">4</div>
+                        <div class="leaderboard-entry__name">ТОГЛОГЧИЙН НЭР</div>
+                        <div class="leaderboard-entry__score">675 🚩</div>
+                    </div>
+                    <div class="leaderboard-entry">
+                        <div class="leaderboard-entry__rank">5</div>
+                        <div class="leaderboard-entry__name">ТОГЛОГЧИЙН НЭР</div>
+                        <div class="leaderboard-entry__score">645 🚩</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debug Panel (toggle with D key) -->
+        <div id="debug-panel" class="hidden">
+            <div>D: <span id="debug-d">0.00</span></div>
+            <label>
+                D multiplier:
+                <input type="range" id="d-multiplier" min="0.1" max="5" step="0.1" value="1">
+                <span id="d-mult-value">1.0</span>
+            </label>
+        </div>
+    </div>
+
+    <script src="/static/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ард-Жамп | Эзэмших Тоглоомын Шинэ Эрин</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Cyberpunk Gaming Palette */
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff0080;
+            --neon-purple: #b300ff;
+            --neon-yellow: #ffff00;
+            --neon-green: #00ff41;
+            --electric-blue: #0080ff;
+            --neon-orange: #ff6b00;
+            
+            /* Dark Theme */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: rgba(26, 26, 36, 0.95);
+            
+            /* Glass Effect */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(0, 255, 255, 0.2);
+            
+            /* Fonts */
+            --font-heading: 'Orbitron', monospace;
+            --font-body: 'Rajdhani', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            
+            /* Effects */
+            --glow-sm: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+            --glow-md: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(179, 0, 255, 0.4);
+            --glow-lg: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(179, 0, 255, 0.6), 0 0 90px rgba(0, 128, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background with Particles */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 10% 20%, rgba(0, 255, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(179, 0, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 128, 255, 0.08) 0%, transparent 60%),
+                linear-gradient(135deg, #0a0a0f 0%, #13131a 50%, #1a1a24 100%);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
+        }
+
+        /* Hexagonal Grid */
+        .hex-grid {
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            background-image: 
+                linear-gradient(30deg, rgba(0, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.02) 87.5%),
+                linear-gradient(150deg, rgba(0, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.02) 87.5%),
+                linear-gradient(30deg, rgba(0, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.02) 87.5%),
+                linear-gradient(150deg, rgba(0, 255, 255, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.02) 87.5%);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+            animation: hexScroll 40s linear infinite;
+        }
+
+        @keyframes hexScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            animation: floatParticle linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.8;
+                transform: translateY(95vh) translateX(10px) scale(1);
+            }
+            95% {
+                opacity: 0.8;
+                transform: translateY(5vh) translateX(-10px) scale(1);
+            }
+            100% {
+                transform: translateY(-5vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Scanlines Effect */
+        .scanlines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 255, 0.015) 0px,
+                rgba(0, 255, 255, 0.015) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+            background-size: 300% 100%;
+            z-index: 9999;
+            box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-pink);
+            animation: gradientShift 3s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* Corner Brackets UI */
+        .corner-brackets {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .corner-brackets.top-left {
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-top: 2px solid var(--neon-cyan);
+            border-left: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.top-right {
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-top: 2px solid var(--neon-cyan);
+            border-right: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-bottom: 2px solid var(--neon-cyan);
+            border-left: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-bottom: 2px solid var(--neon-cyan);
+            border-right: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        /* Navigation Dots - Gaming Style */
+        .nav-dots {
+            position: fixed;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .nav-dot {
+            width: 4px;
+            height: 35px;
+            background: rgba(0, 255, 255, 0.15);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: visible;
+        }
+
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 2px;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .nav-dot.active::before {
+            height: 100%;
+        }
+
+        .nav-dot:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: scaleX(1.5);
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+            background: var(--bg-card);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            border: 1px solid var(--neon-cyan);
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            color: var(--neon-cyan);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--glow-sm);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+        /* Section Container */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-content {
+            max-width: 1400px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Logo Container */
+        .hero-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: var(--glow-lg);
+            animation: logoFloat 4s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                        linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)) border-box;
+        }
+
+        .hero-logo:nth-child(2) {
+            animation-delay: -1s;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--glow-lg), 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-12px) rotate(2deg); }
+            75% { transform: translateY(-6px) rotate(-2deg); }
+        }
+
+        /* Holographic Title */
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .holographic-text {
+            background: linear-gradient(
+                90deg,
+                var(--neon-cyan) 0%,
+                var(--neon-pink) 25%,
+                var(--neon-purple) 50%,
+                var(--neon-yellow) 75%,
+                var(--neon-cyan) 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.4));
+        }
+
+        @keyframes holographic {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: var(--font-mono);
+        }
+
+        .hero-subtitle span {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Animated Tags */
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .tag {
+            padding: 0.6rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--neon-cyan);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 0%, 92% 0%, 100% 35%, 100% 100%,
+                8% 100%, 0% 65%
+            );
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-sm);
+            background: rgba(0, 255, 255, 0.08);
+        }
+
+        .tag:hover::before {
+            left: 100%;
+        }
+
+        /* Data Panel - Gaming HUD Style */
+        .data-panel {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            position: relative;
+            margin-bottom: 3rem;
+            clip-path: polygon(
+                0% 0%, 97% 0%, 100% 3%, 100% 100%,
+                3% 100%, 0% 97%
+            );
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .data-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scanLine 3s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .data-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .data-label::before {
+            content: '◆';
+            font-size: 0.6rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            background: linear-gradient(90deg, #ffffff 0%, var(--neon-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+        }
+
+        /* Stats Grid - Gaming Style */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 8%, 8% 0%, 100% 0%, 100% 92%,
+                92% 100%, 0% 100%
+            );
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-md);
+        }
+
+        .stat-card:hover::after {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 2.75rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+            margin-bottom: 0.4rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Feature Cards - Cyberpunk Style */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.08), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-8px);
+            box-shadow: var(--glow-md);
+        }
+
+        .feature-icon-container {
+            width: 65px;
+            height: 65px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            clip-path: polygon(
+                30% 0%, 70% 0%, 100% 30%, 100% 70%,
+                70% 100%, 30% 100%, 0% 70%, 0% 30%
+            );
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-icon-container {
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        .feature-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Timeline - Tech Style */
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            clip-path: polygon(
+                0% 3%, 3% 0%, 97% 0%, 100% 3%,
+                100% 100%, 0% 100%
+            );
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-md);
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            box-shadow: var(--glow-md);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(
+                30% 0%, 70% 0%, 100% 30%, 100% 70%,
+                70% 100%, 30% 100%, 0% 70%, 0% 30%
+            );
+            z-index: 10;
+        }
+
+        .timeline-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Buttons - Gaming Style */
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 0%, 92% 0%, 100% 25%, 100% 100%,
+                8% 100%, 0% 75%
+            );
+            border: 2px solid;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: left 0.4s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--glow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--glow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-4px);
+            box-shadow: var(--glow-sm);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: var(--bg-card);
+            border: 2px solid var(--neon-cyan);
+            padding: 4rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--glow-lg);
+            clip-path: polygon(
+                0% 2%, 2% 0%, 98% 0%, 100% 2%,
+                100% 98%, 98% 100%, 2% 100%, 0% 98%
+            );
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.08) 0%, transparent 60%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 50%;
+        }
+
+        .loader-ring:nth-child(1) {
+            border-top-color: var(--neon-cyan);
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader-ring:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-right-color: var(--neon-purple);
+            animation: spin 2s linear infinite reverse;
+        }
+
+        .loader-ring:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-bottom-color: var(--neon-pink);
+            animation: spin 2.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: var(--font-mono);
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .loading-text::after {
+            content: '';
+            animation: loadingDots 1.5s infinite;
+        }
+
+        @keyframes loadingDots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+        }
+
+        /* Sponsors Section */
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sponsor-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 2.5rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 8%, 8% 0%, 92% 0%, 100% 8%,
+                100% 92%, 92% 100%, 8% 100%, 0% 92%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--neon-pink);
+            box-shadow: var(--glow-lg);
+        }
+
+        .sponsor-logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .sponsor-logo {
+            max-width: 100%;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: brightness(1.1) contrast(1.05);
+            transition: all 0.4s;
+        }
+
+        .sponsor-card:hover .sponsor-logo {
+            filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+            transform: scale(1.08);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .tech-item {
+            background: var(--glass-bg);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            clip-path: polygon(8% 0%, 100% 0%, 100% 92%, 92% 100%, 0% 100%, 0% 8%);
+        }
+
+        .tech-item:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-sm);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+        }
+
+        .tech-name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem + 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .scroll-indicator i {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Game Modal - Phone Ratio */
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .game-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-modal-content {
+            width: 90%;
+            max-width: 400px;
+            height: 85vh;
+            max-height: 800px;
+            aspect-ratio: 9/16;
+            background: var(--bg-primary);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--glow-lg), 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .game-modal.active .game-modal-content {
+            transform: scale(1);
+        }
+
+        .game-modal-header {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .game-modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .game-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .game-modal-body {
+            width: 100%;
+            height: calc(100% - 60px);
+            overflow: auto;
+        }
+
+        .game-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline-line {
+                left: 25px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 70px;
+            }
+
+            .timeline-marker {
+                left: 25px;
+                transform: translateX(-50%);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-dots {
+                display: none;
+            }
+
+            .corner-brackets {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 1.25rem;
+            }
+
+            .hero-logos {
+                gap: 1.5rem;
+            }
+
+            .hero-logo {
+                width: 90px;
+                height: 90px;
+            }
+
+            .hero-tags {
+                gap: 0.75rem;
+            }
+
+            .tag {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .data-panel {
+                padding: 1.75rem;
+            }
+
+            .feature-card {
+                padding: 1.75rem;
+            }
+
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                letter-spacing: -1px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .section-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-container">
+        <div class="bg-gradient"></div>
+        <div class="hex-grid"></div>
+        <div class="particles" id="particles"></div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Corner Brackets -->
+    <div class="corner-brackets top-left"></div>
+    <div class="corner-brackets top-right"></div>
+    <div class="corner-brackets bottom-left"></div>
+    <div class="corner-brackets bottom-right"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
+        <div class="loading-text">Систем ачаалж байна</div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-label="Нүүр хуудас" data-section="0"></div>
+        <div class="nav-dot" data-label="Тоглоомын тухай" data-section="1"></div>
+        <div class="nav-dot" data-label="Онцлог боломжууд" data-section="2"></div>
+        <div class="nav-dot" data-label="Эдийн засаг" data-section="3"></div>
+        <div class="nav-dot" data-label="Технологи" data-section="4"></div>
+        <div class="nav-dot" data-label="Зах зээл" data-section="5"></div>
+        <div class="nav-dot" data-label="Түншүүд" data-section="6"></div>
+        <div class="nav-dot" data-label="Эхлэх" data-section="7"></div>
+    </div>
+
+    <!-- Section 1: Hero -->
+    <section class="section" id="section-0">
+        <div class="section-content hero-section visible">
+            <div class="hero-logos">
+                <img src="Images/manda.png" alt="Ард Жамп Лого" class="hero-logo">
+                <img src="Images/Dealy logo.jpg" alt="Dealy Лого" class="hero-logo">
+            </div>
+            <h1 class="hero-title">
+                <span class="holographic-text">АРД ЖАМП</span>
+            </h1>
+            <p class="hero-subtitle">
+                Үсэр Хож  • <span>Хязгааргүй адал явдал</span> • Бодит шагнал
+            </p>
+            <div class="hero-tags">
+                <div class="tag">Экшн тоглоом</div>
+                <div class="tag">NFT Технологи</div>
+                <div class="tag">Ард-Койн</div>
+                <div class="tag">Хожлын пүүл</div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span>Доош гүйлгэ</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Core Gameplay -->
+    <section class="section" id="section-1">
+        <div class="section-content">
+            <div class="data-panel">
+                <div class="data-label">
+                    Тоглоомын Санаа
+                </div>
+                <h2 class="section-title">Хамгийн хол хариагаад хож</h2>
+                <p class="section-description">
+                    Ард-Жамп бол туг цуглуулах . Туг цуглуулж, бусад тоглогчидтой өрсөлдөж, бүх насныханд тохирсон хязгааргүй тоглолтоос таашаал аваарай. Энгийн удирдлага, хязгааргүй боломж.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hand-pointer"></i>
+                        </div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">Товшилт</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Хязгааргүй</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Туг цуглуул</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">Бүх</div>
+                        <div class="stat-label">Насныхан</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Lobby Features -->
+    <section class="section" id="section-2">
+        <div class="section-content">
+            <div class="data-label">
+                Тоглоомын боломжууд
+            </div>
+            <h2 class="section-title">Лобби систем</h2>
+            <p class="section-description">
+                Таны тоглоомын туршлагыг өргөжүүлэх олон боломж бүхий лобби систем. Дүрээ өөрчил, хөрөнгөө удирдаж, шилдгүүдийн жагсаалтад өрсөлдөөрэй.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3 class="feature-title">Агуулах</h3>
+                    <p class="feature-description">
+                        NFT интеграцтай өвөрмөц Trail болон Skin цуглуулаарай. Тоглоомын хөрөнгөө өмчлөн, чөлөөтэй арилжаалах боломжтой.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h3 class="feature-title">Дүр тохируулга</h3>
+                    <p class="feature-description">
+                        Өвөрмөц skin болон trail-ээр баатраа чимэглээрэй. Өөрийн онцлог төрхөөр бусдаас ялгар.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="feature-title">Түрийвч систем</h3>
+                    <p class="feature-description">
+                        Ард-Койнтоор тоглоомд нэвтрэх. 50 Ард-ын тогтмол орох төлбөр нь өрсөлдөөний шагналын сан үүсгэнэ.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="feature-title">Шилдгүүдийн самбар</h3>
+                    <p class="feature-description">
+                        Дэлхий даяар өрсөлдөөрэй! Цуглуулсан тугаар эрэмбэ тодорхойлогдоно. Өндөр байршилд шагнал их.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Тусгай арга хэмжээ</h3>
+                    <p class="feature-description">
+                        Тоглогчдыг татсан тусгай үйл явдлууд. Онцгой сорилт, хязгаарлагдмал шагнал, олон нийтийн өрсөлдөөн.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title">Ард-Койн эдийн засаг</h3>
+                    <p class="feature-description">
+                        Тогтмол 50 Ард орох төлбөр нь тоглогчдын сан үүсгэнэ. Шагналыг эрэмбийн дагуу хуваарилна.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Game Economy -->
+    <section class="section" id="section-3">
+        <div class="section-content">
+            <div class="data-label">
+                Эдийн засгийн загвар
+            </div>
+            <h2 class="section-title">Ард-Койн эдийн засаг</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Алхам 1: Орох төлбөр</h3>
+                        <p class="timeline-description">
+                            Тоглоом бүрд 50 Ард-ын тогтмол төлбөр. Бүх тоглогчдод ойлгомжтой, урьдчилан тооцоолох боломжтой зардлын бүтэц.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">01</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Алхам 2: Шагналын сан</h3>
+                        <p class="timeline-description">
+                            Бүх орох төлбөр шагналын санд хуримтлагдана. Олон тоглогч өрсөлдөх тусам шагналын сан томорч, урамшуулал нэмэгдэнэ.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">02</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Алхам 3: Эрэмбийн систем</h3>
+                        <p class="timeline-description">
+                            Тоглогчдыг цуглуулсан тугаар эрэмбэлнэ. Өндөр эрэмбэтэй тоглогчид шагналын сангаас илүү их хувь авна.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">03</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Алхам 4: Шагнал хуваарилалт</h3>
+                        <p class="timeline-description">
+                            Шагналыг эрэмбийн дагуу өөр өөр жингээр хуваарилна. Шилдэг тоглогчид хамгийн их шагнал авах нь өрсөлдөөнийг дэмжинэ.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Tech Stack -->
+    <section class="section" id="section-4">
+        <div class="section-content">
+            <div class="data-label">
+                Технологийн бүтэц
+            </div>
+            <h2 class="section-title">Орчин үеийн технологиор бүтээгдсэн</h2>
+            <p class="section-description">
+                Хиймэл оюун ухаан нэмэх боломжтой, API-тай бүрэн нийцтэй архитектур. Grafana ашиглан бодит цагийн хяналт, асуудал илрүүлэх, эрсдэл удирдах боломжтой.
+            </p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="feature-title">Арын систем</h3>
+                    <p class="feature-description">
+                        Өндөр гүйцэтгэлтэй API эндпойнтуудад зориулсан FastAPI + Python. Олон тоглогчдод зориулсан өргөтгөх боломжтой архитектур.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Урд талын систем</h3>
+                    <p class="feature-description">
+                        Хурдан ачаалагддаг тоглоомд зориулсан Vanilla JS, CSS, HTML. Хүнд framework-гүй, цэвэр гүйцэтгэл.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Хиймэл оюун ухаантай</h3>
+                    <p class="feature-description">
+                        API нийцтэй загвар нь хиймэл оюун ухааны технологийг хялбар нэгтгэх боломж олгоно. Machine learning-д бэлэн.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Хяналт шинжилгээ</h3>
+                    <p class="feature-description">
+                        Тоглоомын бодит цагийн хяналтад зориулсан Grafana самбар. Асуудал илрүүлэх, гүйцэтгэлийг сайжруулах.
+                    </p>
+                </div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">FastAPI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📜</div>
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">CSS3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Grafana</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔗</div>
+                    <div class="tech-name">REST API</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">AI бэлэн</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎮</div>
+                    <div class="tech-name">Game Engine</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Innovation & Market -->
+    <section class="section" id="section-5">
+        <div class="section-content">
+            <div class="data-label">
+                Өрсөлдөөний давуу тал
+            </div>
+            <h2 class="section-title">Бидний онцлог</h2>
+            <p class="section-description">
+                Энгийн тоглоомын хялбар байдлыг NFT өмчлөл болон криптовалютын шагналтай хослуулсан. Хүн бүрт хүртээмжтэй, блокчейнээр ажилладаг.
+            </p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 4rem;">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="feature-title">NFT нэгтгэл</h3>
+                    <p class="feature-description">
+                        Тоглогчид skin болон trail-аа жинхэнээр эзэмшинэ. Блокчейн дээрх NFT-ээр өөрийн зүйлсийг арилжаалах, зарах эсвэл цуглуулах боломжтой.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title">Ард-Койн эдийн засаг</h3>
+                    <p class="feature-description">
+                        Ард-Койноор ажилладаг ил тод тоглоомын эдийн засаг. Тогтмол орох төлбөр, гүйцэтгэлд суурилсан хувьсах шагнал.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="feature-title">Нэг товшилтын хөгжил</h3>
+                    <p class="feature-description">
+                        Энгийн механиктай хязгааргүй тоглоом. Сурахад амархан, эзэмшихэд хэцүү, орхиход боломжгүй.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="data-label" style="margin-top: 4rem;">
+                Зорилтот зах зээл
+            </div>
+            <h2 class="section-title">Бидний хэрэглэгчид</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">Бүх</div>
+                    <div class="stat-label">Насны бүлэг</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <div class="stat-value">Крипто</div>
+                    <div class="stat-label">Нийгэмлэг</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-value">Энгийн</div>
+                    <div class="stat-label">Тоглогчид</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="stat-value">2X</div>
+                    <div class="stat-label">Зах зээлийн давхцал</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Sponsors -->
+    <section class="section" id="section-6">
+        <div class="section-content">
+            <div class="data-label">
+                Түншлэл
+            </div>
+            <h2 class="section-title">Манай түншүүд</h2>
+            <p class="section-description">
+                Web3 шинэчлэлийн хил хязгаарыг түлхэж буй салбарын тэргүүлэгчдийн дэмжлэгтэй.
+            </p>
+            <div class="sponsors-grid">
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/krypto.png" alt="Krypto" class="sponsor-logo">
+                    </div>
+                </div>
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/ardlogo1.png" alt="ARD" class="sponsor-logo">
+                    </div>
+                </div>
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/tngr.jpg" alt="Tengeriin Gal" class="sponsor-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: CTA -->
+    <section class="section" id="section-7">
+        <div class="section-content">
+            <div class="cta-section">
+                <div class="cta-content">
+                    <div class="data-label" style="justify-content: center;">
+                        Тоглоход бэлэн үү?
+                    </div>
+                    <h2 class="section-title">Нэг товшилт • Хязгааргүй адал явдал</h2>
+                    <p class="section-description" style="margin-left: auto; margin-right: auto; text-align: center;">
+                        Тоглож эзэмших тоглоомын шинэ эринд нэгдээрэй. Ард-Жамп өрсөлдөөний догдлол болон бодит хөрөнгө эзэмших боломжийг хослуулна. Өнөөдөр аялалаа эхлүүлж, аварга болоорой!
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" id="startGameBtn">
+                            <i class="fas fa-play"></i>
+                            Тоглоом эхлэх
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modal -->
+    <div class="game-modal" id="gameModal">
+        <div class="game-modal-content">
+            <div class="game-modal-header">
+                <div class="game-modal-title">АРД ЖАМП</div>
+                <button class="game-modal-close" id="closeGameBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="game-modal-body">
+                <!-- Game runs on localhost:8000 via FastAPI -->
+                <!-- Make sure to start the server first: cd game && uvicorn main:app -->
+                <iframe src="http://127.0.0.1:8000" title="Ард Жамп Game"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 25 : 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                
+                // Random colors
+                const colors = ['#00ffff', '#b300ff', '#ff0080', '#00ff41'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            createParticles();
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1800);
+        });
+
+        // Progress Bar with throttle
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+                    document.getElementById('progressBar').style.width = scrollPercentage + '%';
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // Section Animations with Intersection Observer
+        const sections = document.querySelectorAll('.section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        const observerOptions = {
+            threshold: 0.25,
+            rootMargin: '-50px 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelector('.section-content').classList.add('visible');
+                    
+                    const sectionIndex = Array.from(sections).indexOf(entry.target);
+                    navDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === sectionIndex);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
+
+        // Nav Dots Click
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionIndex = parseInt(dot.getAttribute('data-section'));
+                sections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                const currentSection = Array.from(sections).findIndex(section => {
+                    const rect = section.getBoundingClientRect();
+                    return rect.top >= -100 && rect.top < window.innerHeight / 2;
+                });
+
+                if (e.key === 'ArrowDown' && currentSection < sections.length - 1 && currentSection >= 0) {
+                    e.preventDefault();
+                    sections[currentSection + 1].scrollIntoView({ behavior: 'smooth' });
+                } else if (e.key === 'ArrowUp' && currentSection > 0) {
+                    e.preventDefault();
+                    sections[currentSection - 1].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Smooth reveal for stat values (counter animation)
+        const statValues = document.querySelectorAll('.stat-value');
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statValues.forEach(stat => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'translateY(20px)';
+            stat.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            statObserver.observe(stat);
+        });
+
+        // Add hover sound effect simulation (visual feedback)
+        document.querySelectorAll('.btn, .nav-dot, .feature-card, .stat-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transition = 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+        // Parallax effect for corner brackets
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const brackets = document.querySelectorAll('.corner-brackets');
+            brackets.forEach(bracket => {
+                const speed = 0.1;
+                bracket.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Game Modal Functionality
+        const gameModal = document.getElementById('gameModal');
+        const startGameBtn = document.getElementById('startGameBtn');
+        const closeGameBtn = document.getElementById('closeGameBtn');
+
+        // Open modal
+        startGameBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            gameModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close modal via close button
+        closeGameBtn.addEventListener('click', () => {
+            gameModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close modal when clicking outside (on the backdrop)
+        gameModal.addEventListener('click', (e) => {
+            if (e.target === gameModal) {
+                gameModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && gameModal.classList.contains('active')) {
+                gameModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>
+

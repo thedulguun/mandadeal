@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ард-Жамп Танилцуулга | Эзэмших Тоглоомын Хувьсгал</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Cyberpunk Gaming Palette */
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff0080;
+            --neon-purple: #b300ff;
+            --neon-yellow: #ffff00;
+            --neon-green: #00ff41;
+            --electric-blue: #0080ff;
+            
+            /* Dark Theme */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: rgba(26, 26, 36, 0.9);
+            
+            /* Glass Effect */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(0, 255, 255, 0.2);
+            
+            /* Fonts */
+            --font-heading: 'Orbitron', monospace;
+            --font-body: 'Rajdhani', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            
+            /* Effects */
+            --glow-sm: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+            --glow-md: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(179, 0, 255, 0.4);
+            --glow-lg: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(179, 0, 255, 0.6), 0 0 90px rgba(0, 128, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background with Particles */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(179, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 128, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0f 0%, #13131a 50%, #1a1a24 100%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Hexagonal Grid */
+        .hex-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(30deg, rgba(0, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.03) 87.5%, rgba(0, 255, 255, 0.03)),
+                linear-gradient(150deg, rgba(0, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.03) 87.5%, rgba(0, 255, 255, 0.03)),
+                linear-gradient(30deg, rgba(0, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.03) 87.5%, rgba(0, 255, 255, 0.03)),
+                linear-gradient(150deg, rgba(0, 255, 255, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 255, 0.03) 87.5%, rgba(0, 255, 255, 0.03));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+            animation: hexScroll 30s linear infinite;
+        }
+
+        @keyframes hexScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(140px); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan);
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Scanlines Effect */
+        .scanlines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 255, 0.03) 0px,
+                rgba(0, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+            z-index: 9999;
+            transition: width 0.1s;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Corner Brackets UI */
+        .corner-brackets {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .corner-brackets.top-left {
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-top: 3px solid var(--neon-cyan);
+            border-left: 3px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.top-right {
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-top: 3px solid var(--neon-cyan);
+            border-right: 3px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-bottom: 3px solid var(--neon-cyan);
+            border-left: 3px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        .corner-brackets.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-bottom: 3px solid var(--neon-cyan);
+            border-right: 3px solid var(--neon-cyan);
+            box-shadow: var(--glow-sm);
+        }
+
+        /* Navigation Dots - Gaming Style */
+        .nav-dots {
+            position: fixed;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-dot {
+            width: 4px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--neon-cyan);
+            border-radius: 2px;
+            transition: height 0.3s;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .nav-dot.active::before {
+            height: 100%;
+        }
+
+        .nav-dot:hover {
+            background: rgba(0, 255, 255, 0.4);
+            width: 6px;
+        }
+
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-card);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--neon-cyan);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--neon-cyan);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: var(--glow-sm);
+        }
+
+        .nav-dot:hover::after {
+            opacity: 1;
+        }
+
+        /* Section Container */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .section-content {
+            max-width: 1400px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Glitch Logo */
+        .hero-logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 900;
+            box-shadow: var(--glow-lg);
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+            clip-path: polygon(
+                0% 5%, 5% 0%, 95% 0%, 100% 5%,
+                100% 95%, 95% 100%, 5% 100%, 0% 95%
+            );
+        }
+
+        .hero-logo::before,
+        .hero-logo::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-logo::before {
+            animation: glitch-1 2s infinite;
+            color: var(--neon-pink);
+            z-index: -1;
+        }
+
+        .hero-logo::after {
+            animation: glitch-2 2s infinite;
+            color: var(--neon-yellow);
+            z-index: -2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(2deg); }
+            75% { transform: translateY(-5px) rotate(-2deg); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-2px, 2px); }
+            66% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(2px, -2px); }
+            66% { transform: translate(-2px, 2px); }
+        }
+
+        /* Holographic Title */
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2rem;
+            letter-spacing: -3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .holographic-text {
+            background: linear-gradient(
+                45deg,
+                var(--neon-cyan) 0%,
+                var(--neon-pink) 25%,
+                var(--neon-purple) 50%,
+                var(--neon-yellow) 75%,
+                var(--neon-cyan) 100%
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic 4s ease-in-out infinite;
+            text-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.5),
+                0 0 60px rgba(179, 0, 255, 0.3);
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+        }
+
+        @keyframes holographic {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-family: var(--font-mono);
+        }
+
+        .hero-subtitle span {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Animated Tags */
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .tag {
+            padding: 0.75rem 1.75rem;
+            background: var(--glass-bg);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: var(--font-mono);
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 0%, 90% 0%, 100% 30%, 100% 100%,
+                10% 100%, 0% 70%
+            );
+            transition: all 0.3s;
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .tag:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-md);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .tag:hover::before {
+            left: 100%;
+        }
+
+        /* Data Panel - Gaming HUD Style */
+        .data-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 0;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            position: relative;
+            margin-bottom: 4rem;
+            clip-path: polygon(
+                0% 0%, 95% 0%, 100% 5%, 100% 100%,
+                5% 100%, 0% 95%
+            );
+            box-shadow: var(--glow-md);
+        }
+
+        .data-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .data-label {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--neon-cyan);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .data-label::before {
+            content: '▶';
+            font-size: 1.25rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            background: linear-gradient(90deg, #ffffff, var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.375rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        /* Stats Grid - Gaming Style */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 2px solid var(--neon-cyan);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 10%, 10% 0%, 100% 0%, 100% 90%,
+                90% 100%, 0% 100%
+            );
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--glow-lg);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Feature Cards - Cyberpunk Style */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-10px);
+            box-shadow: var(--glow-md);
+        }
+
+        .feature-icon-container {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            clip-path: polygon(
+                30% 0%, 70% 0%, 100% 30%, 100% 70%,
+                70% 100%, 30% 100%, 0% 70%, 0% 30%
+            );
+            box-shadow: var(--glow-sm);
+        }
+
+        .feature-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+
+        /* Timeline - Tech Style */
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--bg-card);
+            border: 2px solid var(--neon-cyan);
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s;
+            clip-path: polygon(
+                0% 5%, 5% 0%, 95% 0%, 100% 5%,
+                100% 100%, 0% 100%
+            );
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: var(--glow-md);
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            box-shadow: var(--glow-md);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(
+                30% 0%, 70% 0%, 100% 30%, 100% 70%,
+                70% 100%, 30% 100%, 0% 70%, 0% 30%
+            );
+        }
+
+        .timeline-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        .timeline-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 1.125rem;
+        }
+
+        /* Buttons - Gaming Style */
+        .btn {
+            padding: 1.25rem 3rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 0%, 90% 0%, 100% 30%, 100% 100%,
+                10% 100%, 0% 70%
+            );
+            border: 2px solid;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--glow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-sm);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            background: var(--bg-card);
+            border: 3px solid var(--neon-cyan);
+            padding: 5rem 3rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--glow-lg);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 0.5s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        .loader-ring:nth-child(1) {
+            border-top-color: var(--neon-cyan);
+            animation-duration: 2s;
+        }
+
+        .loader-ring:nth-child(2) {
+            border-right-color: var(--neon-purple);
+            animation-duration: 3s;
+        }
+
+        .loader-ring:nth-child(3) {
+            border-bottom-color: var(--neon-pink);
+            animation-duration: 4s;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: var(--font-mono);
+            color: var(--neon-cyan);
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 80px;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-dots {
+                display: none;
+            }
+
+            .corner-brackets {
+                display: none;
+            }
+
+            .section {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .stats-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-panel {
+                padding: 2rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+        }
+
+        /* Sponsors Section */
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sponsor-card {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-cyan);
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(
+                0% 10%, 10% 0%, 90% 0%, 100% 10%,
+                100% 90%, 90% 100%, 10% 100%, 0% 90%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .sponsor-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: var(--glow-lg);
+            border-color: var(--neon-pink);
+        }
+
+        .sponsor-card:hover::before {
+            opacity: 1;
+        }
+
+        .sponsor-logo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .sponsor-logo {
+            max-width: 100%;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: brightness(1.1) contrast(1.1);
+            transition: all 0.4s;
+        }
+
+        .sponsor-card:hover .sponsor-logo {
+            filter: brightness(1.3) contrast(1.2) drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+            transform: scale(1.1);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--glass-bg);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%);
+        }
+
+        .tech-item:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: var(--glow-sm);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .tech-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+
+        .tech-name {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-container">
+        <div class="bg-gradient"></div>
+        <div class="hex-grid"></div>
+        <div class="particles" id="particles"></div>
+        <div class="scanlines"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Corner Brackets -->
+    <div class="corner-brackets top-left"></div>
+    <div class="corner-brackets top-right"></div>
+    <div class="corner-brackets bottom-left"></div>
+    <div class="corner-brackets bottom-right"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
+        <div class="loading-text">Системийг эхлүүлж байна...</div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot active" data-label="[ ТАНИЛЦ ]" data-section="0"></div>
+        <div class="nav-dot" data-label="[ ТОГЛООМ ]" data-section="1"></div>
+        <div class="nav-dot" data-label="[ БОЛОМЖУУД ]" data-section="2"></div>
+        <div class="nav-dot" data-label="[ ЭДИЙН ЗАСАГ ]" data-section="3"></div>
+        <div class="nav-dot" data-label="[ ТЕХНОЛОГИ ]" data-section="4"></div>
+        <div class="nav-dot" data-label="[ ЗАХ ЗЭЭЛ ]" data-section="5"></div>
+        <div class="nav-dot" data-label="[ ДЭМЖИГЧИД ]" data-section="6"></div>
+        <div class="nav-dot" data-label="[ ТОГЛОХ ]" data-section="7"></div>
+    </div>
+
+    <!-- Section 1: Hero -->
+    <section class="section" id="section-0">
+        <div class="section-content hero-section visible">
+            <div class="hero-logo-container">
+                <img src="Images/manda.png" alt="Ard Jump Logo" style="width: 150px; height: 150px; border-radius: 20px; object-fit: cover; box-shadow: var(--glow-lg); animation: float 4s ease-in-out infinite;">
+            </div>
+            <div class="hero-logo-container">
+                <img src="Images/DEALY LOGO1.1.png" alt="Ard Jump Logo" style="width: 150px; height: 150px; border-radius: 20px; object-fit: cover; box-shadow: var(--glow-lg); animation: float 4s ease-in-out infinite;">
+            </div>
+            <h1 class="hero-title">
+                <span class="holographic-text">АРД ЖАМП</span>
+            </h1>
+            <p class="hero-subtitle">
+                Нэг Товшилт • <span>Төгсгөлгүй Хөгжил</span> • Эзэмших Тоглоом
+            </p>
+            <div class="hero-tags">
+                <div class="tag">ЭКШН ТОГЛООМ</div>
+                <div class="tag">NFT БЭЛЭН</div>
+                <div class="tag">АРД-МОНЕТ</div>
+                <div class="tag">ЭЗЭМШИХ</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Core Gameplay -->
+    <section class="section" id="section-1">
+        <div class="section-content">
+            <div class="data-panel">
+                <div class="data-label">
+                    ҮНД ТОГЛООМ
+                </div>
+                <h2 class="section-title">WILL HERO-ООС САНАА АВСАН</h2>
+                <p class="section-description">
+                    Ард-Жамп бол Will Hero-тэй төстэй нэг товшилтоор тоглогдох экшн тоглоом юм. Туг цуглуулж, бусадтай өрсөлдөж, бүх насны хүмүүст тохиромжтой хязгааргүй тоглолтоос таашаал аваарай. Энгийн механик, хязгааргүй боломжууд.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">Нэг Товшилт</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Төгсгөлгүй</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="stat-value">100+</div>
+                        <div class="stat-label">Туг Цуглуулах</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">БҮХ</div>
+                        <div class="stat-label">Нас Бүлэг</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Lobby Features -->
+    <section class="section" id="section-2">
+        <div class="section-content">
+            <div class="data-label">
+                ТОГЛООМЫН БОЛОМЖУУД
+            </div>
+            <h2 class="section-title">ЛОББИ СИСТЕМ</h2>
+            <p class="section-description">
+                Таны тоглоомын туршлагыг сайжруулах олон боломжоор дүүрэн лобби систем. Дүрээ өөрчлөх, хөрөнгөө удирдах, шилдгүүдийн самбарт өрсөлдөх боломжтой.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3 class="feature-title">ИНВЕНТОРИ</h3>
+                    <p class="feature-description">
+                        NFT интеграци бүхий өвөрмөц Trails болон Skin-үүдийг цуглуулаарай. Тоглоомын хөрөнгөө өөрийнхөө болгож, чөлөөтэй арилжаалаарай.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <h3 class="feature-title">ДҮРИЙН ЗАСАЛ</h3>
+                    <p class="feature-description">
+                        Өвөрмөц skin болон trail-ээр баатараа тохируулаарай. Өөрийн гэсэн онцлог төрхөөр бусдаас ялгар.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="feature-title">ХЭТЭВЧ СИСТЕМ</h3>
+                    <p class="feature-description">
+                        Ард-монет ашиглан тоглоомд орох. 50 Ард-ын тогтмол орох хураамж нь өрсөлдөөний шагналын сан үүсгэнэ.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="feature-title">ШИЛДГҮҮДИЙН САМБАР</h3>
+                    <p class="feature-description">
+                        Дэлхий даяар өрсөлдөөрэй! Цуглуулсан тугаар тодорхойлогдох эрэмбэ. Эрэмбээ өсгөж, байрлалдаа тулгуурлан шагнал авах боломжтой.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-calendar-star"></i>
+                    </div>
+                    <h3 class="feature-title">ҮЙЛ ЯВДЛУУД</h3>
+                    <p class="feature-description">
+                        Тоглогчдыг татан оролцуулах тусгай үйл явдлууд. Онцгой сорилт, хязгаарлагдмал хугацааны шагнал, олон нийтийн өрсөлдөөнүүд.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title">АРД-МОНЕТ ЭДИЙН ЗАСАГ</h3>
+                    <p class="feature-description">
+                        Тогтмол 50 Ард орох хураамж нь тоглогчдын сан үүсгэнэ. Шагналыг рангийн дагуу хувьсах жингээр тэгш хуваарилна.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Game Economy -->
+    <section class="section" id="section-3">
+        <div class="section-content">
+            <div class="data-label">
+                ЭДИЙН ЗАСГИЙН ЗАГВАР
+            </div>
+            <h2 class="section-title">АРД-МОНЕТ ЭДИЙН ЗАСАГ</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">01: ОРОХ ХУРААМЖ</h3>
+                        <p class="timeline-description">
+                            Тоглоом тус бүрд 50 Ард-ын тогтмол хураамж. Энэ нь бүх тоглогчдод ойлгомжтой, урьдчилан тооцоолох боломжтой зардлын бүтэц.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">01</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">02: ШАГНАЛЫН САН</h3>
+                        <p class="timeline-description">
+                            Бүх орох хураамж шагналын санд хуримтлагдана. Олон тоглогч өрсөлдөх тусам шагналын сан томорч, урамшуулал ихсэнэ.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">02</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">03: ЭРЭМБИЙН СИСТЕМ</h3>
+                        <p class="timeline-description">
+                            Тоглогчдыг цуглуулсан тугаар эрэмбэлнэ. Өндөр эрэмбэтэй тоглогчид шагналын сангаас илүү их хувь авна.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">03</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">04: ШАГНАЛ ХУВААРИЛАЛТ</h3>
+                        <p class="timeline-description">
+                            Шагналыг эрэмбийн дагуу өөр өөр жингээр хуваарилна. Шилдэг тоглогчид хамгийн их шагнал авах нь өрсөлдөөнийг бий болгоно.
+                        </p>
+                    </div>
+                    <div class="timeline-marker">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Tech Stack -->
+    <section class="section" id="section-4">
+        <div class="section-content">
+            <div class="data-label">
+                ТЕХНОЛОГИЙН АРХИТЕКТУР
+            </div>
+            <h2 class="section-title">ОРЧИН ҮЕ ТЕХНОЛОГИОР БҮТЭЭГДСЭН</h2>
+            <p class="section-description">
+                AI давхарга нэмэх боломжтой, API-тай бүрэн нийцтэй архитектур. Grafana ашиглан бодит цагийн хяналт, асуудал илрүүлэх, эрсдэл удирдах боломжтой.
+            </p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 3rem;">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="feature-title">BACK-END</h3>
+                    <p class="feature-description">
+                        Өндөр гүйцэтгэлтэй API эндпойнтуудад зориулсан FastAPI + Python. Олон тоглогчдод зориулсан өргөтгөх боломжтой архитектур.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">FRONT-END</h3>
+                    <p class="feature-description">
+                        Хөнгөн, хурдан ачаалагддаг тоглоомд зориулсан Vanilla JS, CSS, HTML. Хүнд framework-гүй, цэвэр гүйцэтгэл.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">ХИЙМЭЛ ОЮУН УХААНтай</h3>
+                    <p class="feature-description">
+                        API нийцтэй загвар нь AI технологийг хялбар нэгтгэх боломж олгоно. Machine learning сайжруулалтанд бэлэн.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">ХЯНАЛТ ШИНЖИЛГЭЭ</h3>
+                    <p class="feature-description">
+                        Тоглоомын бодит цагийн хяналтад зориулсан Grafana самбар. Асуудал илрүүлэх, эрсдэл удирдах, гүйцэтгэлийг сайжруулах.
+                    </p>
+                </div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">FastAPI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📜</div>
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">CSS3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Grafana</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔗</div>
+                    <div class="tech-name">REST API</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">AI БЭЛЭН</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎮</div>
+                    <div class="tech-name">GAME ENGINE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Innovation & Market -->
+    <section class="section" id="section-5">
+        <div class="section-content">
+            <div class="data-label">
+                ЯЛГААТАЙ БАЙДАЛ
+            </div>
+            <h2 class="section-title">БИДНИЙГ ОНЦЛОХ ЮМ</h2>
+            <p class="section-description">
+                Энгийн тоглоомын хялбар байдлыг NFT өмчлөл болон крипто валютын шагналтай хослуулсан. Хэн бүхэнд хүртээмжтэй, блокчэйнээр ажилладаг.
+            </p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 4rem;">
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="feature-title">NFT НЭГТГЭЛ</h3>
+                    <p class="feature-description">
+                        Тоглогчид skin болон trail-аа жинхэнээр өмчилнө. Блокчэйн дээрх NFT-ээр өөрийн зүйлсийг арилжаалах, зарах эсвэл цуглуулах боломжтой.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3 class="feature-title">АРД-МОНЕТ ЭДИЙН ЗАСАГ</h3>
+                    <p class="feature-description">
+                        Ард-монетоор ажилладаг ил тод тоглоомын эдийн засаг. Тогтмол орох төлбөр, гүйцэтгэлд тулгуурласан хувьсах шагнал.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-container">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="feature-title">НЭГ ТОВШИЛТЫН ХӨГЖИЛ</h3>
+                    <p class="feature-description">
+                        Энгийн механиктай төгсгөлгүй тоглоом. Сурахад амархан, эзэмшихэд хэцүү, орхиход боломжгүй.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="data-label" style="margin-top: 4rem;">
+                ЗОРИЛТОТ ЗАХ ЗЭЭЛ
+            </div>
+            <h2 class="section-title">БИДНИЙ ҮЙЛЧЛҮҮЛЭГЧИД</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">БҮХ</div>
+                    <div class="stat-label">Насны Бүлгүүд</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bitcoin"></i>
+                    </div>
+                    <div class="stat-value">Крипто</div>
+                    <div class="stat-label">Нийгэмлэг</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-value">Энгийн</div>
+                    <div class="stat-label">Тоглогчид</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="stat-value">2X</div>
+                    <div class="stat-label">Зах Зээлийн Давхцал</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Sponsors -->
+    <section class="section" id="section-6">
+        <div class="section-content">
+            <div class="data-label">
+                ДЭМЖИГЧИД
+            </div>
+            <h2 class="section-title">ЭЛИТ ИВЭЭН ТЭТГЭГЧИД</h2>
+            <p class="section-description">
+                Web3 инновацийн хязгаарыг түлхэж буй салбарын тэргүүлэгчдийн дэмжлэгтэй.
+            </p>
+            <div class="sponsors-grid">
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/krypto.png" alt="Krypto" class="sponsor-logo">
+                    </div>
+                </div>
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/ardlogo1.png" alt="ARD" class="sponsor-logo">
+                    </div>
+                </div>
+                <div class="sponsor-card">
+                    <div class="sponsor-logo-container">
+                        <img src="images/tngr.jpg" alt="TNG" class="sponsor-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: CTA -->
+    <section class="section" id="section-7">
+        <div class="section-content">
+            <div class="cta-section">
+                <div class="cta-content">
+                    <div class="data-label" style="justify-content: center;">
+                        ТОГЛОХОД БЭЛЭН ҮҮ?
+                    </div>
+                    <h2 class="section-title">НЭГ ТОВШИЛТ • ТӨГСГӨЛГҮЙ ХӨГЖИЛ</h2>
+                    <p class="section-description">
+                        Тоглож эзэмших тоглоомын хувьсгалд нэгдээрэй. Ард-Жамп өрсөлдөөний догдлол болон жинхэнэ хөрөнгө эзэмших боломжийг хослуулна. Өнөөдөр аялалаа эхлүүлж, аварга болоорой!
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-play"></i>
+                            ТОГЛОХ
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-book-open"></i>
+                            ГАРЫН АВЛАГА
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fab fa-discord"></i>
+                            DISCORD НЭГДЭХ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            createParticles();
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+        });
+
+        // Section Animations
+        const sections = document.querySelectorAll('.section');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelector('.section-content').classList.add('visible');
+                    
+                    const sectionIndex = Array.from(sections).indexOf(entry.target);
+                    navDots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === sectionIndex);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Nav Dots Click
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionIndex = parseInt(dot.getAttribute('data-section'));
+                sections[sectionIndex].scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            const currentSection = Array.from(sections).findIndex(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top >= 0 && rect.top < window.innerHeight / 2;
+            });
+
+            if (e.key === 'ArrowDown' && currentSection < sections.length - 1) {
+                e.preventDefault();
+                sections[currentSection + 1].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp' && currentSection > 0) {
+                e.preventDefault();
+                sections[currentSection - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Add glitch effect on hover to logo
+        const heroLogo = document.querySelector('.hero-logo');
+        heroLogo.addEventListener('mouseenter', () => {
+            heroLogo.style.animation = 'float 4s ease-in-out infinite, glitch-1 0.3s infinite';
+        });
+        heroLogo.addEventListener('mouseleave', () => {
+            heroLogo.style.animation = 'float 4s ease-in-out infinite';
+        });
+    </script>
+</body>
+</html>
